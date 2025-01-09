@@ -4,7 +4,7 @@ const apiKey = '813c14220b370c5211a0aa9b7af25372'; // Your OpenWeatherMap API Ke
 const locations = [
     { name: '久山倉庫店', lat: 33.6830, lon: 130.4736 },
     { name: '幕張倉庫店', lat: 35.6562, lon: 140.0250 },
-    { name: '多摩境倉庫店', lat: 35.6146, lon: 139.4519 }
+    { name: '小郡倉庫店', lat: 33.4044, lon: 130.5873 },
 ];
 
 function fetchWeather(location, index) {
