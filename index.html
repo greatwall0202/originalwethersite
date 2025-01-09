@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>天気予報</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="news"></div> <!-- 一年前のニュースを表示 -->
-    
-    <h1>36か所の明日の天気</h1>
-    <div id="weather-container">
-        <!-- 天気情報がここに表示される -->
+    <div class="container">
+        <h1>明日の天気</h1>
+        <div class="locations">
+            <div id="location1" class="location">
+                <h2>久山倉庫店</h2>
+                <p id="temp1">Loading...</p>
+            </div>
+            <div id="location2" class="location">
+                <h2>幕張倉庫店</h2>
+                <p id="temp2">Loading...</p>
+            </div>
+            <div id="location3" class="location">
+                <h2>多摩境倉庫店</h2>
+                <p id="temp3">Loading...</p>
+            </div>
+        </div>
+
+        <div id="forecast" class="forecast">
+            <h2>週間天気予報</h2>
+            <div id="forecast-details">Select a location to see the forecast.</div>
+        </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
+
