@@ -42,7 +42,8 @@ async function fetchWeatherData() {
     try {
         // 各拠点に対して天気データを取得
         for (const station of stations) {
-            const weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${station.lat}&lon=${station.lon}&exclude=current,minutely,hourly,alerts&appid=813c14220b370c5211a0aa9b7af25372`;
+            const weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${station.lat}&lon=${station.lon}&exclude=current,minutely,hourly,alerts&appid=813c14220b370c5211a0aa9b7af25372
+`;
             const weatherResponse = await fetch(weatherApiUrl);
             const weatherData = await weatherResponse.json();
             displayWeatherData(station, weatherData);
