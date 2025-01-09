@@ -9,7 +9,7 @@ const locations = [
 
 // Fetch weather data for tomorrow for the three locations
 function fetchWeather(location, index) {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&cnt=2&appid=${apiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${apiKey}`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -28,10 +28,17 @@ function fetchWeather(location, index) {
             } else {
                 document.getElementById(`temp${index}`).innerHTML = 'Error: Invalid data';
             }
+             // 天気が定義されている場合、表示
+             if (weatherDescription) {
+                document.getElementById(`weather${index}`).innerHTML = weatherDescription; // 天気の説明を表示
+            } else {
+                document.getElementById(`weather${index}`).innerHTML = 'Weather data not available';
+            }
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
             document.getElementById(`temp${index}`).innerHTML = 'Error';
+            document.getElementById(`weather${index}`).innerHTML = 'Error';
         });
 }
 
