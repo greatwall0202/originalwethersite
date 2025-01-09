@@ -1,4 +1,4 @@
-const apiKey = '1a9e7d04d69124aa1b670a87a74a57de'; // Your OpenWeatherMap API Key
+const apiKey = '813c14220b370c5211a0aa9b7af25372'; // Your OpenWeatherMap API Key
 
 // Coordinates for the three locations
 const locations = [
