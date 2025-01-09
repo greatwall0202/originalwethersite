@@ -7,40 +7,48 @@ const locations = [
     { name: '多摩境倉庫店', lat: 35.6146, lon: 139.4519 }
 ];
 
-// Fetch weather data for tomorrow for the three locations
 function fetchWeather(location, index) {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${apiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&cnt=2&appid=${apiKey}`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data); // APIレスポンス全体をログに出力してデバッグ
+            console.log(data); // レスポンスデータを確認するためにログ出力
 
-            // 'data.list'が存在し、2つ以上の要素が含まれていることを確認
-            if (data && data.list && data.list.length > 1) {
-                const tempTomorrow = data.list[1]?.main?.temp; // オプショナルチェイニング（?.）
+            // data.listが存在し、配列が空でないか確認
+            if (data && data.list && data.list.length > 0) {
+                // data.listから天気情報を処理
+                data.list.forEach((day, index) => {
+                    const tempTomorrow = day.main.temp; // 明日の気温
+                    const weatherDescription = day.weather[0].description; // 天気の説明（晴れ、曇りなど）
 
-                // 'tempTomorrow'が定義されていれば表示
-                if (tempTomorrow !== undefined) {
-                    document.getElementById(`temp${index}`).innerHTML = `${tempTomorrow}°C`;
-                } else {
-                    document.getElementById(`temp${index}`).innerHTML = 'No temperature data available';
-                }
+                    // 気温が定義されている場合、表示
+                    if (tempTomorrow !== undefined) {
+                        document.getElementById(`temp${index + 1}`).innerHTML = `${tempTomorrow}°C`;
+                    } else {
+                        document.getElementById(`temp${index + 1}`).innerHTML = 'No temperature data available';
+                    }
+
+                    // 天気が定義されている場合、表示
+                    if (weatherDescription) {
+                        document.getElementById(`weather${index + 1}`).innerHTML = weatherDescription; // 天気の説明を表示
+                    } else {
+                        document.getElementById(`weather${index + 1}`).innerHTML = 'Weather data not available';
+                    }
+                });
             } else {
-                document.getElementById(`temp${index}`).innerHTML = 'Error: Invalid data';
-            }
-             // 天気が定義されている場合、表示
-             if (weatherDescription) {
-                document.getElementById(`weather${index}`).innerHTML = weatherDescription; // 天気の説明を表示
-            } else {
-                document.getElementById(`weather${index}`).innerHTML = 'Weather data not available';
+                // data.listが空または無効な場合のエラーハンドリング
+                console.error('No data available or invalid response structure');
+                document.getElementById(`temp${index + 1}`).innerHTML = 'Error';
+                document.getElementById(`weather${index + 1}`).innerHTML = 'Error';
             }
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
-            document.getElementById(`temp${index}`).innerHTML = 'Error';
-            document.getElementById(`weather${index}`).innerHTML = 'Error';
+            document.getElementById(`temp${index + 1}`).innerHTML = 'Error';
+            document.getElementById(`weather${index + 1}`).innerHTML = 'Error';
         });
 }
+
 
 
 // Fetch 7-day forecast for a given location
