@@ -17,37 +17,38 @@ function fetchWeather(location, index) {
             // data.listが存在し、配列が空でないか確認
             if (data && data.list && data.list.length > 0) {
                 // data.listから天気情報を処理
-                data.list.forEach((day, index) => {
+                data.list.forEach((day, idx) => {
                     const tempTomorrow = day.main.temp; // 明日の気温
-                    const weatherDescription = day.weather[0].description; // 天気の説明（晴れ、曇りなど）
+                    const weatherDescription = day.weather[0]?.description; // 天気の説明（晴れ、曇りなど）
 
                     // 気温が定義されている場合、表示
                     if (tempTomorrow !== undefined) {
-                        document.getElementById(`temp${index + 1}`).innerHTML = `${tempTomorrow}°C`;
+                        document.getElementById(`temp${index + idx}`).innerHTML = `${tempTomorrow}°C`;
                     } else {
-                        document.getElementById(`temp${index + 1}`).innerHTML = 'No temperature data available';
+                        document.getElementById(`temp${index + idx}`).innerHTML = 'No temperature data available';
                     }
 
                     // 天気が定義されている場合、表示
                     if (weatherDescription) {
-                        document.getElementById(`weather${index + 1}`).innerHTML = weatherDescription; // 天気の説明を表示
+                        document.getElementById(`weather${index + idx}`).innerHTML = weatherDescription; // 天気の説明を表示
                     } else {
-                        document.getElementById(`weather${index + 1}`).innerHTML = 'Weather data not available';
+                        document.getElementById(`weather${index + idx}`).innerHTML = 'Weather data not available';
                     }
                 });
             } else {
                 // data.listが空または無効な場合のエラーハンドリング
                 console.error('No data available or invalid response structure');
-                document.getElementById(`temp${index + 1}`).innerHTML = 'Error';
-                document.getElementById(`weather${index + 1}`).innerHTML = 'Error';
+                document.getElementById(`temp${index}`).innerHTML = 'Error';
+                document.getElementById(`weather${index}`).innerHTML = 'Error';
             }
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
-            document.getElementById(`temp${index + 1}`).innerHTML = 'Error';
-            document.getElementById(`weather${index + 1}`).innerHTML = 'Error';
+            document.getElementById(`temp${index}`).innerHTML = 'Error';
+            document.getElementById(`weather${index}`).innerHTML = 'Error';
         });
 }
+
 
 
 
