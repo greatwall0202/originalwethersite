@@ -2,8 +2,8 @@ const apiKey = '813c14220b370c5211a0aa9b7af25372'; // Your OpenWeatherMap API Ke
 
 // Coordinates for the three locations
 const locations = [
-    { name: '久山倉庫店', lat: 33.6830, lon: 130.4736 },
-    { name: '幕張倉庫店', lat: 35.6562, lon: 140.0250 },
+    { name: '久山倉庫店', lat: 33.652232, lon: 130.4867466 },
+    { name: '熊本倉庫店', lat: 32.729213, lon: 130.779994 },
     { name: '小郡倉庫店', lat: 33.399956, lon: 130.574736 },
 ];
 
